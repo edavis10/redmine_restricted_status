@@ -1,3 +1,5 @@
-# English strings go here for Rails i18n
 en:
-  my_label: "My label"
+  restricted_status_text_settings: 'Select which projects which should only allow the restricted issue statuses.'
+  restricted_status_label_restricted_projects: 'Restricted Projects'
+  restricted_status_label_allowed_statuses: 'Allowed statuses on restricted projects'
+  

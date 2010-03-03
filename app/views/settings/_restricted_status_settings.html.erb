@@ -1,0 +1,16 @@
+
+<fieldset>
+  <%= content_tag(:legend, l(:restricted_status_text_settings)) %>
+  <p>
+    <%= content_tag(:label, l(:restricted_status_label_restricted_projects)) %>
+    <% projects = Project.find_all_by_id(@settings['restricted_projects']) %>
+    <%= select_tag("settings[restricted_projects]",
+                   project_tree_options_for_select(Project.active, {:selected => projects}),
+                   :multiple => true, :size => 10) %>
+  </p>
+
+  <p>
+    <%= content_tag(:label, l(:restricted_status_label_allowed_statuses)) %>
+    <%= select_tag("settings[allowed_statuses]", content_tag(:option, '') + options_from_collection_for_select(IssueStatus.all, :id, :name, @settings['allowed_statuses'].collect(&:to_i)), :multiple => true) %>
+  </p>
+</fieldset>
