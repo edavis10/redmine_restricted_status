@@ -8,8 +8,8 @@ module RedmineRestrictedStatus
           unloadable # Send unloadable so it will not be unloaded in development
 
           
-          def new_statuses_allowed_to_with_restricted_status(user)
-            statuses = new_statuses_allowed_to_without_restricted_status(user)
+          def new_statuses_allowed_to_with_restricted_status(user, include_default=false)
+            statuses = new_statuses_allowed_to_without_restricted_status(user, include_default)
 
             if Setting.plugin_redmine_restricted_status &&
                 Setting.plugin_redmine_restricted_status['restricted_projects'].include?(self.project_id.to_s)
