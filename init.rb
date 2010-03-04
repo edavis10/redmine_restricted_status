@@ -1,5 +1,20 @@
 require 'redmine'
 
+# similar to config/environments/*.rb
+case Rails.env
+when "test"
+  config.gem "webrat"
+end
+
+# Patches to the Redmine core.
+require 'dispatcher'
+
+Dispatcher.to_prepare :redmine_restricted_status do
+  require_dependency 'issue'
+  Issue.send(:include, RedmineRestrictedStatus::Patches::IssuePatch)
+end
+
+
 Redmine::Plugin.register :redmine_restricted_status do
   name 'Restricted Status'
   author 'Eric Davis'
