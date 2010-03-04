@@ -11,7 +11,9 @@ require 'dispatcher'
 
 Dispatcher.to_prepare :redmine_restricted_status do
   require_dependency 'issue'
-  Issue.send(:include, RedmineRestrictedStatus::Patches::IssuePatch)
+  unless Issue.included_modules.include? RedmineRestrictedStatus::Patches::IssuePatch
+    Issue.send(:include, RedmineRestrictedStatus::Patches::IssuePatch)
+  end
 end
 
 
